@@ -1,0 +1,43 @@
+	curl -fsSL https://www.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh > install.sh
+vim install.sh
+nvim install.sh
+pacman -S which
+sudo pacman -S which
+ls
+rm install.sh
+ls
+ls -lah
+rm .shell.pre-oh-my-zsh
+cd .oh-my-zsh
+ls
+vim oh-my-zsh.sh
+nvim oh-my-zsh.sh
+ls
+vim ~/.config/zsh
+nvim ~/.config/zsh
+nvim ~/.config/zsh/.zshrc.zni
+nvim /etc/zsh/zprofile
+nvim /etc/zsh/zshenv
+ls
+vim
+nvim install.sh
+chmod +x install.sh
+./install.sh
+pacman -S git
+sduo pacman -S git
+sudoo pacman -S git
+sudo pacman -S git
+./install.sh
+ls
+ls
+ls -lah
+vim .zshrc
+nvim .zshrc
+mv .zshrc ~/.config/zsh/.zshrc
+ls
+ls
+ls -lah
+mv .oh-my-zsh .config/oh-my-zsh
+vim ~/.config/zsh
+nvim ~/.config/zsh/.zshrc

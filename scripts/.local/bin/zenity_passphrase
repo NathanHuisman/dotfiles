@@ -1,0 +1,2 @@
+#!/bin/sh
+zenity --password --title "Enter your passphrase" --timeout 60

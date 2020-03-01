@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Umount
+Comment=Unmount a drive
+Exec=/usr/bin/env dmenu-umount
+Terminal=false
+Type=Application

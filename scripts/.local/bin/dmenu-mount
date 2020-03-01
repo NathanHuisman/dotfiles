@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# 
+# Mount script utilizing dmenu
+#
+
+MOUNTPOINTS=`lsblk -Jo NAME,LABEL,MOUNTPOINT | jq -r '.blockdevices|[.[]|.children[]|select(.mountpoint == null)|.name + (if (.label) then (" (" + .label + ")") else "" end)]|join(",")'`;
+MOUNT=`echo -n $MOUNTPOINTS | tr ',' '\n'| dmenu -p "Mount" | cut -d\  -f1`
+if [ -z "$MOUNT" ]
+then
+	exit 1
+fi
+
+TMP=`mktemp`
+findmnt -l | cut -d\  -f1 | sort > $TMP
+DEST=`(echo "New mountpoint" && (find $HOME/.local/media/ -maxdepth 1 -mindepth 1 | sort | comm -23 /dev/fd/0 $TMP | xargs -n1 basename)) | dmenu -p "Select mountpoint"`
+if [ "$DEST" = "New mountpoint" ]
+then
+	DEST=`dmenu -p "Name"`
+	mkdir $HOME/.local/media/$DEST
+elif [ -z "$DEST" ]
+then
+	exit 1;
+fi
+
+# zenity_askpass: the zenity_askpass script in this directory
+export SUDO_ASKPASS=`which zenity_passphrase`
+sudo -A mount /dev/$MOUNT $HOME/.local/media/$DEST

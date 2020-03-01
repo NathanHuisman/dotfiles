@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# 
+# Umount script utilizing dmenu
+#
+
+TMP=`mktemp`
+findmnt -l | cut -d\  -f1 | sort > $TMP
+DEST=`((find $HOME/.local/media/ -maxdepth 1 -mindepth 1 | sort | comm -12 /dev/fd/0 $TMP | xargs -n1 basename)) | dmenu -p "Select mountpoint"`
+if [ -z "$DEST" ]
+then
+	exit 1;
+fi
+
+export SUDO_ASKPASS=`which zenity_passphrase`
+sudo -A umount $HOME/.local/media/$DEST
